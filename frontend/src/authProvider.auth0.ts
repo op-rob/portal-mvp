@@ -14,11 +14,16 @@ const authProvider: AuthProvider = {
   login: async () => {
     // Auth0 handles login through redirect
     if (auth0Context?.loginWithRedirect) {
-      await auth0Context.loginWithRedirect();
+      await auth0Context.loginWithRedirect({
+        appState: {
+          returnTo: "/"
+        }
+      });
     }
     
     return {
       success: true,
+      redirectTo: "/",
     };
   },
 

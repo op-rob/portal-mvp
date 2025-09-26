@@ -64,6 +64,8 @@ export const Auth0App = ({ children }: Auth0AppProps) => {
         audience: audience,
       }}
       cacheLocation="localstorage"
+      useRefreshTokens={true}
+      useRefreshTokensFallback={false}
     >
       <Auth0AppInner>{children}</Auth0AppInner>
     </Auth0Provider>
