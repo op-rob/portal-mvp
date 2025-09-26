@@ -5,7 +5,7 @@ services:
     runtime: node
     repo: https://github.com/op-rob/portal-mvp
     rootDir: backend
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     startCommand: npm run start:prod
     plan: free
     envVars:
