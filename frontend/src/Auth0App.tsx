@@ -27,7 +27,27 @@ const Auth0AppInner = ({ children }: Auth0AppProps) => {
         throw new Error("Not authenticated");
       },
     });
-  }, [auth0]);
+
+    // Handle Auth0 callback redirect
+    if (auth0.isAuthenticated && window.location.search.includes("code=")) {
+      // Clear URL params after successful authentication
+      window.history.replaceState({}, document.title, "/");
+      // Force page refresh to ensure proper state update
+      window.location.reload();
+    }
+  }, [auth0.isAuthenticated, auth0.isLoading]);
+
+  // Show loading spinner while Auth0 is determining authentication state
+  if (auth0.isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   return <>{children}</>;
 };
