@@ -14,5 +14,15 @@ export default registerAs(
     synchronize: process.env.NODE_ENV === 'development',
     logging: process.env.NODE_ENV === 'development',
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    extra: process.env.NODE_ENV === 'production' ? {
+      // Force IPv4 to avoid IPv6 connectivity issues
+      family: 4,
+      // Connection timeout
+      connectionTimeoutMillis: 30000,
+      // Idle timeout  
+      idleTimeoutMillis: 30000,
+      // Max connections
+      max: 10,
+    } : {},
   }),
 );
