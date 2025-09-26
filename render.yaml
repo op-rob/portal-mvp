@@ -3,7 +3,7 @@ services:
   - type: web
     name: ownerpulse-api
     runtime: node
-    repo: https://github.com/yourusername/OwnerPulse  # Update this
+    repo: https://github.com/op-rob/portal-mvp
     rootDir: backend
     buildCommand: npm install && npm run build
     startCommand: npm run start:prod
