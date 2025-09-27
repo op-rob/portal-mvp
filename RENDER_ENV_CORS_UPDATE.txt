@@ -1,0 +1,16 @@
+# Add this environment variable to Render backend service:
+
+FRONTEND_URL=https://frontend-six-chi-74.vercel.app
+
+# Steps to update in Render:
+# 1. Go to https://dashboard.render.com
+# 2. Find your OwnerPulse backend service
+# 3. Go to Environment tab
+# 4. Add: FRONTEND_URL = https://frontend-six-chi-74.vercel.app
+# 5. Save and redeploy service
+
+# The updated CORS configuration now allows:
+# - localhost:3000 (local dev)
+# - localhost:5173 (Vite dev server)
+# - https://frontend-six-chi-74.vercel.app (production)
+# - Any URL from FRONTEND_URL env var
