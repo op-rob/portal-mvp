@@ -29,7 +29,7 @@ export class Property {
   @Column()
   state: string;
 
-  @Column()
+  @Column({ name: 'zip_code' })
   zipCode: string;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: true })
@@ -57,10 +57,10 @@ export class Property {
   status: string;
 
   @ManyToOne(() => User, (user) => user.properties)
-  @JoinColumn({ name: 'ownerId' })
+  @JoinColumn({ name: 'owner_id' })
   owner: User;
 
-  @Column()
+  @Column({ name: 'owner_id' })
   ownerId: string;
 
   @OneToMany(() => Booking, (booking) => booking.property)
@@ -69,9 +69,9 @@ export class Property {
   @OneToMany(() => WorkOrder, (workOrder) => workOrder.property)
   workOrders: WorkOrder[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
