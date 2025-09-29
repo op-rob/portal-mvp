@@ -14,31 +14,31 @@ export class Booking {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ name: 'guest_name' })
   guestName: string;
 
-  @Column()
+  @Column({ name: 'guest_email' })
   guestEmail: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'guest_phone', nullable: true })
   guestPhone: string;
 
-  @Column('date')
+  @Column({ name: 'check_in_date', type: 'date' })
   checkInDate: Date;
 
-  @Column('date')
+  @Column({ name: 'check_out_date', type: 'date' })
   checkOutDate: Date;
 
-  @Column()
+  @Column({ name: 'number_of_guests' })
   numberOfGuests: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column({ name: 'total_amount', type: 'decimal', precision: 10, scale: 2 })
   totalAmount: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: true })
+  @Column({ name: 'cleaning_fee', type: 'decimal', precision: 10, scale: 2, nullable: true })
   cleaningFee: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: true })
+  @Column({ name: 'service_fee', type: 'decimal', precision: 10, scale: 2, nullable: true })
   serviceFee: number;
 
   @Column({ default: 'confirmed' })
@@ -47,22 +47,22 @@ export class Booking {
   @Column({ nullable: true })
   platform: string; // airbnb, vrbo, booking.com, direct
 
-  @Column({ nullable: true })
+  @Column({ name: 'platform_booking_id', nullable: true })
   platformBookingId: string;
 
-  @Column('text', { nullable: true })
+  @Column({ type: 'text', nullable: true })
   notes: string;
 
   @ManyToOne(() => Property, (property) => property.bookings)
-  @JoinColumn({ name: 'propertyId' })
+  @JoinColumn({ name: 'property_id' })
   property: Property;
 
-  @Column()
+  @Column({ name: 'property_id' })
   propertyId: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

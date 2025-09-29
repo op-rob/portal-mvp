@@ -22,10 +22,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: any) {
+    console.log('🔍 Auth0 JWT Payload:', JSON.stringify(payload, null, 2));
+    
     return {
       userId: payload.sub,
-      email: payload.email,
-      name: payload.name,
+      email: payload.email || payload.preferred_username || payload['https://ownerpulse.com/email'] || null,
+      name: payload.name || payload.nickname || 'Unknown User',
       picture: payload.picture,
       roles: payload['https://ownerpulse.com/roles'] || ['user'],
       permissions: payload['https://ownerpulse.com/permissions'] || [],

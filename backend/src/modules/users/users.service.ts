@@ -51,18 +51,24 @@ export class UsersService {
   }
 
   async findOrCreateFromAuth0(auth0User: any): Promise<User> {
+    console.log('🔍 Auth0 User Data:', JSON.stringify(auth0User, null, 2));
+    
     let user = await this.findByAuth0Id(auth0User.userId);
 
     if (!user) {
       // Create new user from Auth0 data
+      const email = auth0User.email || `${auth0User.userId.replace('|', '_')}@placeholder.com`;
+      const fullName = auth0User.name || 'Unknown User';
+      
       const createUserDto: CreateUserDto = {
-        email: auth0User.email,
-        firstName: auth0User.name?.split(' ')[0] || 'Unknown',
-        lastName: auth0User.name?.split(' ').slice(1).join(' ') || '',
+        email: email,
+        firstName: fullName.split(' ')[0] || 'Unknown',
+        lastName: fullName.split(' ').slice(1).join(' ') || 'User',
         auth0Id: auth0User.userId,
         role: 'owner',
       };
 
+      console.log('🔍 Creating user with data:', JSON.stringify(createUserDto, null, 2));
       user = await this.create(createUserDto);
     }
 
